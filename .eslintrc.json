@@ -1,0 +1,18 @@
+{
+    "env": {
+        "es6": true
+    },
+    "extends": ["airbnb", "airbnb/hooks", "airbnb-typescript", "prettier"],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": ["@typescript-eslint"],
+    "ignorePatterns": ["node_modules", "build", "generated"],
+    "rules": {
+        "no-console": ["warn", { "allow": ["warn", "error"] }],
+        "no-restricted-syntax": "off"
+    }
+}
