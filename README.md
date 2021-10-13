@@ -59,7 +59,7 @@ $ yarn # or `npm i`
 Prior to code generation or deployment, set the authorisation code that links your account on thegraph.com with this deployment.
 
 ```bash
-$ graph auth  --product hosted-service <auth code>
+$ yarn graph auth --product hosted-service <auth code>
 ```
 
 ### Build the subgraph
@@ -67,7 +67,7 @@ $ graph auth  --product hosted-service <auth code>
 Useful for discovering compile errors before deploying
 
 ```bash
-$ yarn graph:build
+$ yarn build
 ````
 
 ### Code Generation
@@ -75,5 +75,5 @@ $ yarn graph:build
 Required if the schema has changed. 
 
 ```bash
-$ yarn graph:codegen
+$ yarn codegen
 ```
