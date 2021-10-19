@@ -8,10 +8,10 @@
     "scripts": {
         "codegen": "graph codegen",
         "build": "graph build",
-        "deploy": "graph deploy --node https://api.thegraph.com/deploy/ glamperd/InterRep-Groups-kovan",
-        "create-local": "graph create --node http://localhost:8020/ glamperd/InterRep-Groups-kovan",
-        "remove-local": "graph remove --node http://localhost:8020/ glamperd/InterRep-Groups-kovan",
-        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 glamperd/InterRep-Groups-kovan",
+        "deploy": "graph deploy --product hosted-service interrep/interrep-groups-kovan",
+        "create-local": "graph create --node http://localhost:8020/ interrep/InterRep-Groups-kovan",
+        "remove-local": "graph remove --node http://localhost:8020/ interrep/InterRep-Groups-kovan",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 interrep/InterRep-Groups-kovan",
         "lint": "eslint src --ext js,jsx,ts,tsx",
         "commit": "cz",
         "precommit": "lint-staged"
