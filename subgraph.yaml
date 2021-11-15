@@ -12,7 +12,7 @@ dataSources:
           abi: Groups
       mapping:
           kind: ethereum/events
-          apiVersion: 0.0.5
+          apiVersion: 0.2.0
           language: wasm/assemblyscript
           entities:
               - Group
@@ -28,4 +28,3 @@ dataSources:
               - event: IdentityCommitmentDeleted(indexed bytes32,indexed bytes32,uint256,uint256)
                 handler: deleteIdentityCommitment
           file: ./src/mapping.ts
-
