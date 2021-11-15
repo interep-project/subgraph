@@ -1,6 +1,6 @@
-specVersion: 0.0.3
-description: InterRep groups and their members. Group members are Semaphore ID commitments
-repository: https://github.com/interrep/subgraph/subgraph
+specVersion: 0.0.4
+description: A system that allows you to prove that you have a certain reputation with an NFT badge or anonymously with zero-knowledge technologies.
+repository: https://github.com/interrep/subgraph
 schema:
     file: ./schema.graphql
 dataSources:
