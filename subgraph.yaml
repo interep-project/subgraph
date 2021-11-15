@@ -5,23 +5,27 @@ schema:
     file: ./schema.graphql
 dataSources:
     - kind: ethereum/contract
-      name: InterRepGroups
+      name: Groups
       network: kovan
       source:
-          address: "0xB9A55B681BF8426ceb71F54d127D3391fd28a1E4"
-          abi: InterRepGroups
-          startBlock: 27388000
+          address: "0xF3C86A419a1F9aF498B1A570f2Ea874372d23763"
+          abi: Groups
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5
           language: wasm/assemblyscript
           entities:
-              - IdentityCommitment
+              - Group
+              - Member
           abis:
-              - name: InterRepGroups
-                file: ./abis/InterRepGroups.json
+              - name: Groups
+                file: ./abis/Groups.json
           eventHandlers:
-              - event: NewRootHash(indexed bytes32,indexed bytes32,uint256,uint256)
-                handler: handleNewRootHash
+              - event: GroupAdded(indexed bytes32,bytes32,uint8)
+                handler: addGroup
+              - event: IdentityCommitmentAdded(indexed bytes32,indexed bytes32,uint256,uint256)
+                handler: addIdentityCommitment
+              - event: IdentityCommitmentDeleted(indexed bytes32,indexed bytes32,uint256,uint256)
+                handler: deleteIdentityCommitment
           file: ./src/mapping.ts
 
