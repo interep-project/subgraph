@@ -34,7 +34,7 @@
     </h4>
 </div>
 
-The InterRep subgraph allows groups and group members to be queried using GraphQL. It is available at https://api.thegraph.com/subgraphs/name/interrep/kovan, currently only for testnet data.
+The InterRep subgraph allows groups and group members to be queried using GraphQL. It is available at https://thegraph.com/hosted-service/subgraph/interrep/kovan, currently only for testnet data.
 
 ---
 
