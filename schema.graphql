@@ -2,16 +2,15 @@ type Group @entity {
     id: ID!
     provider: String!
     name: String!
-    leafCount: BigInt!
-    memberCount: BigInt!
+    depth: Int!
+    size: Int!
     members: [Member!]! @derivedFrom(field: "group")
 }
 
 type Member @entity {
     id: ID!
-    identityCommitment: String
-    rootHash: String
-    leafIndex: BigInt!
-    group: Group
+    identityCommitment: BigInt!
+    root: BigInt!
+    index: Int!
+    group: Group!
 }
-
