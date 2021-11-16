@@ -10,21 +10,27 @@ import { concat, hash } from "./utils"
 export function addGroup(event: GroupAdded): void {
     log.debug(`GroupAdded event block: {}`, [event.block.number.toString()])
 
-    const { provider, name, depth } = event.params
-
-    const groupId = hash(concat(provider, name))
+    const groupId = hash(concat(event.params.provider, event.params.name))
     const group = new Group(groupId)
 
-    log.info("Creating group '{}' with provider '{}' and name '{}'", [group.id, provider.toString(), name.toString()])
+    log.info("Creating group '{}' with provider '{}' and name '{}'", [
+        group.id,
+        event.params.provider.toString(),
+        event.params.name.toString()
+    ])
 
-    group.provider = provider.toString()
-    group.name = name.toString()
-    group.depth = depth
+    group.provider = event.params.provider.toString()
+    group.name = event.params.name.toString()
+    group.depth = event.params.depth
     group.size = 0
 
     group.save()
 
-    log.info("Group with provider '{}' and name '{}' has been created", [provider.toString(), name.toString()])
+    log.info("Group with provider '{}' and name '{}' has been created", [
+        group.id,
+        event.params.provider.toString(),
+        event.params.name.toString()
+    ])
 }
 
 /**
@@ -34,24 +40,24 @@ export function addGroup(event: GroupAdded): void {
 export function addIdentityCommitment(event: IdentityCommitmentAdded): void {
     log.debug(`IdentityCommitmentAdded event block {}`, [event.block.number.toString()])
 
-    const { provider, name, identityCommitment, root } = event.params
-
-    const groupId = hash(concat(provider, name))
+    const groupId = hash(concat(event.params.provider, event.params.name))
     const group = Group.load(groupId)
 
     if (group) {
-        const memberId = hash(concat(ByteArray.fromBigInt(identityCommitment), ByteArray.fromHexString(groupId)))
+        const memberId = hash(
+            concat(ByteArray.fromBigInt(event.params.identityCommitment), ByteArray.fromHexString(groupId))
+        )
         const member = new Member(memberId)
 
         log.info("Adding member '{}' in the group with provider '{}' and name '{}'", [
             member.id,
-            provider.toString(),
-            name.toString()
+            event.params.provider.toString(),
+            event.params.name.toString()
         ])
 
         member.group = groupId
-        member.identityCommitment = identityCommitment
-        member.root = root
+        member.identityCommitment = event.params.identityCommitment
+        member.root = event.params.root
         member.index = group.size
 
         member.save()
@@ -62,8 +68,8 @@ export function addIdentityCommitment(event: IdentityCommitmentAdded): void {
 
         log.info("Member '{}' of the group with provider '{}' and name '{}' has been added", [
             member.id,
-            provider.toString(),
-            name.toString()
+            event.params.provider.toString(),
+            event.params.name.toString()
         ])
     }
 }
@@ -75,26 +81,26 @@ export function addIdentityCommitment(event: IdentityCommitmentAdded): void {
 export function deleteIdentityCommitment(event: IdentityCommitmentDeleted): void {
     log.debug(`IdentityCommitmentDeleted event block {}`, [event.block.number.toString()])
 
-    const { provider, name, identityCommitment, root } = event.params
-
-    const groupId = hash(concat(provider, name))
-    const memberId = hash(concat(ByteArray.fromBigInt(identityCommitment), ByteArray.fromHexString(groupId)))
+    const groupId = hash(concat(event.params.provider, event.params.name))
+    const memberId = hash(
+        concat(ByteArray.fromBigInt(event.params.identityCommitment), ByteArray.fromHexString(groupId))
+    )
     const member = new Member(memberId)
 
     log.info("Deleting member '{}' from the group with provider '{}' and name '{}'", [
         member.id,
-        provider.toString(),
-        name.toString()
+        event.params.provider.toString(),
+        event.params.name.toString()
     ])
 
     member.identityCommitment = BigInt.zero()
-    member.root = root
+    member.root = event.params.root
 
     member.save()
 
     log.info("Member '{}' of the group with provider '{}' and name '{}' has been deleted", [
         member.id,
-        provider.toString(),
-        name.toString()
+        event.params.provider.toString(),
+        event.params.name.toString()
     ])
 }
