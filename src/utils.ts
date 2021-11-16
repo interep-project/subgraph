@@ -7,17 +7,12 @@ import { ByteArray, crypto } from "@graphprotocol/graph-ts"
  * @returns Final concatenated byte array.
  */
 export function concat(a: ByteArray, b: ByteArray): ByteArray {
-    const out = new Uint8Array(a.length + b.length)
+    const c = new ByteArray(a.length + b.length)
 
-    for (let i = 0; i < a.length; i += 1) {
-        out[i] = a[i]
-    }
+    c.set(a)
+    c.set(b, a.length)
 
-    for (let j = 0; j < b.length; j += 1) {
-        out[a.length + j] = b[j]
-    }
-
-    return out as ByteArray
+    return c
 }
 
 /**
