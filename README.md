@@ -34,11 +34,7 @@
     </h4>
 </div>
 
-The subgraph allows groups and group members to be queried using graphql.
-
-The subgraph is available at https://thegraph.com/hosted-service/subgraph/glamperd/interrep-groups-kovan, currently only for testnet data.
-
-The hosting service provided by the graph protocol community is used, so that data is updated soon after a smart contract event is emitted. Only `addRootHash` events are currently supported.
+The InterRep subgraph allows groups and group members to be queried using GraphQL. It is available at https://api.thegraph.com/subgraphs/name/interrep/kovan, currently only for testnet data.
 
 ---
 
@@ -54,26 +50,42 @@ $ yarn # or `npm i`
 
 ## Usage
 
-### Authorisation
+The subgraph definition consists of a few files:
 
-Prior to code generation or deployment, set the authorisation code that links your account on thegraph.com with this deployment.
+* `subgraph.yaml`: a YAML file containing the subgraph manifest,
+* `schema.graphql`: a GraphQL schema that defines what data is stored for the subgraph, and how to query it via GraphQL,
+* `src/mappings.ts`: AssemblyScript code that translates from the event data to the entities defined in the schema.
+
+### Lint
+
+Lint the `src` AssemblyScript code:
 
 ```bash
-$ yarn graph auth --product hosted-service <auth code>
+yarn lint
 ```
 
-### Build the subgraph
+### Code generation
 
-Useful for discovering compile errors before deploying
-
-```bash
-$ yarn build
-````
-
-### Code Generation
-
-Required if the schema has changed. 
+Generate AssemblyScript types for the subgraph (required every time the schema changes):
 
 ```bash
-$ yarn codegen
+yarn codegen
 ```
+
+### Authorization
+
+Set the authorisation code that links your account on thegraph.com:
+
+```bash
+yarn auth <access-token>
+```
+
+### Deploy
+
+Deploy the subgraph to the [hosted service](https://thegraph.com/docs/hostedservice/deploy-subgraph-hosted):
+
+```bash
+yarn deploy <subgraph-name> 
+```
+
+
