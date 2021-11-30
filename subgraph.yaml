@@ -8,9 +8,9 @@ dataSources:
       name: Groups
       network: kovan
       source:
-          address: "0xF3C86A419a1F9aF498B1A570f2Ea874372d23763"
+          address: "0x220fBdB6F996827b1Cf12f0C181E8d5e6de3a36F"
           abi: Groups
-          startBlock: 28311377
+          startBlock: 28591229
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5
