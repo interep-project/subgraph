@@ -1,7 +1,58 @@
 import { BigInt, log, ByteArray } from "@graphprotocol/graph-ts"
-import { GroupAdded, IdentityCommitmentAdded, IdentityCommitmentDeleted } from "../generated/Groups/Groups"
-import { Group, Member } from "../generated/schema"
+import {
+    GroupAdded,
+    IdentityCommitmentAdded,
+    IdentityCommitmentDeleted,
+    OffchainMerkleRoot
+} from "../generated/Groups/Groups"
+import { Group, Member, OffchainGroup } from "../generated/schema"
 import { concat, hash } from "./utils"
+
+/**
+ * Adds an offchain group in the storage.
+ * @param event Ethereum event emitted when an offchain Merkle root is published.
+ */
+export function updateOffchainGroup(event: OffchainMerkleRoot): void {
+    log.debug(`OffchainMerkleRoot event block: {}`, [event.block.number.toString()])
+
+    const groupId = hash(concat(event.params.provider, event.params.name))
+    let group = OffchainGroup.load(groupId)
+
+    // Creates the group if it is not exist.
+    if (group === null) {
+        log.info("Creating offchain group '{}' with provider '{}' and name '{}'", [
+            groupId,
+            event.params.provider.toString(),
+            event.params.name.toString()
+        ])
+
+        group = new OffchainGroup(groupId)
+
+        group.provider = event.params.provider.toString()
+        group.name = event.params.name.toString()
+        group.roots = [event.params.root]
+
+        group.save()
+
+        log.info("Offchain group with provider '{}' and name '{}' has been created", [
+            group.id,
+            event.params.provider.toString(),
+            event.params.name.toString()
+        ])
+    }
+    // Add the root to an existing offchain group.
+    else {
+        group.roots.push(event.params.root)
+
+        group.save()
+
+        log.info("Merkle root of the offchain group with provider '{}' and name '{}' has been added", [
+            group.id,
+            event.params.provider.toString(),
+            event.params.name.toString()
+        ])
+    }
+}
 
 /**
  * Adds a group in the storage.
@@ -34,10 +85,10 @@ export function addGroup(event: GroupAdded): void {
 }
 
 /**
- * Adds an identity commitment in a group.
+ * Adds a member in a group.
  * @param event Ethereum event emitted when an identity commitment is added to a group.
  */
-export function addIdentityCommitment(event: IdentityCommitmentAdded): void {
+export function addMember(event: IdentityCommitmentAdded): void {
     log.debug(`IdentityCommitmentAdded event block {}`, [event.block.number.toString()])
 
     const groupId = hash(concat(event.params.provider, event.params.name))
@@ -78,7 +129,7 @@ export function addIdentityCommitment(event: IdentityCommitmentAdded): void {
  * Deletes an identity commitment from a group.
  * @param event Ethereum event emitted when an identity commitment is deleted from a group.
  */
-export function deleteIdentityCommitment(event: IdentityCommitmentDeleted): void {
+export function deleteMember(event: IdentityCommitmentDeleted): void {
     log.debug(`IdentityCommitmentDeleted event block {}`, [event.block.number.toString()])
 
     const groupId = hash(concat(event.params.provider, event.params.name))

@@ -8,9 +8,9 @@ dataSources:
       name: Groups
       network: kovan
       source:
-          address: "0x220fBdB6F996827b1Cf12f0C181E8d5e6de3a36F"
+          address: "0xc068f3F15f367a60eb2B7c0620961A15A3b36fA3"
           abi: Groups
-          startBlock: 28591229
+          startBlock: 28799296
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5
@@ -22,10 +22,12 @@ dataSources:
               - name: Groups
                 file: ./abis/Groups.json
           eventHandlers:
+              - event: OffchainMerkleRoot(indexed bytes32,indexed bytes32,uint256)
+                handler: updateOffchainGroup
               - event: GroupAdded(indexed bytes32,bytes32,uint8)
                 handler: addGroup
               - event: IdentityCommitmentAdded(indexed bytes32,indexed bytes32,uint256,uint256)
-                handler: addIdentityCommitment
+                handler: addMember
               - event: IdentityCommitmentDeleted(indexed bytes32,indexed bytes32,uint256,uint256)
-                handler: deleteIdentityCommitment
+                handler: deleteMember
           file: ./src/mapping.ts
