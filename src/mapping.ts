@@ -3,17 +3,17 @@ import {
     GroupAdded,
     IdentityCommitmentAdded,
     IdentityCommitmentDeleted,
-    OffchainMerkleRoot
+    OffchainRoot
 } from "../generated/Groups/Groups"
 import { Group, Member, OffchainGroup } from "../generated/schema"
 import { concat, hash } from "./utils"
 
 /**
  * Adds an offchain group in the storage.
- * @param event Ethereum event emitted when an offchain Merkle root is published.
+ * @param event Ethereum event emitted when an offchain root is published.
  */
-export function updateOffchainGroup(event: OffchainMerkleRoot): void {
-    log.debug(`OffchainMerkleRoot event block: {}`, [event.block.number.toString()])
+export function updateOffchainGroup(event: OffchainRoot): void {
+    log.debug(`OffchainRoot event block: {}`, [event.block.number.toString()])
 
     const groupId = hash(concat(event.params.provider, event.params.name))
     let group = OffchainGroup.load(groupId)

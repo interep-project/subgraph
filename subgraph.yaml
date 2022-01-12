@@ -8,9 +8,9 @@ dataSources:
       name: Groups
       network: kovan
       source:
-          address: "0xc068f3F15f367a60eb2B7c0620961A15A3b36fA3"
+          address: "0x8c29e0b77e32f704F03eeCE01c041192A5EB6c77"
           abi: Groups
-          startBlock: 28799296
+          startBlock: 29230447
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5
@@ -22,7 +22,7 @@ dataSources:
               - name: Groups
                 file: ./abis/Groups.json
           eventHandlers:
-              - event: OffchainMerkleRoot(indexed bytes32,indexed bytes32,uint256)
+              - event: OffchainRoot(indexed bytes32,indexed bytes32,uint256)
                 handler: updateOffchainGroup
               - event: GroupAdded(indexed bytes32,bytes32,uint8)
                 handler: addGroup
