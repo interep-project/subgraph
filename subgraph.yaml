@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 description: A system that allows you to prove that you have a certain reputation with an NFT badge or anonymously with zero-knowledge technologies.
-repository: https://github.com/interep/subgraph
+repository: https://github.com/interep-project/subgraph
 schema:
     file: ./schema.graphql
 dataSources:

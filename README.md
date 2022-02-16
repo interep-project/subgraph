@@ -6,7 +6,7 @@
 </p>
 
 <p align="center">
-    <a href="https://github.com/interep" target="_blank">
+    <a href="https://github.com/interep-project" target="_blank">
         <img src="https://img.shields.io/badge/project-Interep-blue.svg?style=flat-square">
     </a>
     <a href="https://eslint.org/" target="_blank">
@@ -15,7 +15,7 @@
     <a href="https://prettier.io/" target="_blank">
         <img alt="Code style prettier" src="https://img.shields.io/badge/code%20style-prettier-f8bc45?style=flat-square&logo=prettier">
     </a>
-    <img alt="Repository top language" src="https://img.shields.io/github/languages/top/interep/contracts?style=flat-square">
+    <img alt="Repository top language" src="https://img.shields.io/github/languages/top/interep-project/contracts?style=flat-square">
 </p>
 
 <div align="center">
@@ -43,7 +43,7 @@ The Interep subgraph allows groups and group members to be queried using GraphQL
 Clone this repository and install the dependencies:
 
 ```bash
-$ git clone https://github.com/interep/subgraph.git
+$ git clone https://github.com/interep-project/subgraph.git
 $ cd subgraph
 $ yarn # or `npm i`
 ```

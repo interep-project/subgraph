@@ -3,7 +3,7 @@
     "version": "0.3.0",
     "description": "Interep subgraph definition (The Graph).",
     "main": "index.js",
-    "repository": "git@github.com:interep/subgraph.git",
+    "repository": "git@github.com:interep-project/subgraph.git",
     "license": "MIT",
     "scripts": {
         "codegen": "graph codegen",
