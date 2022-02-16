@@ -1,9 +1,9 @@
 {
-    "name": "interrep-subgraph",
+    "name": "interep-subgraph",
     "version": "0.3.0",
-    "description": "InterRep subgraph definition (The Graph).",
+    "description": "Interep subgraph definition (The Graph).",
     "main": "index.js",
-    "repository": "git@github.com:InterRep/subgraph.git",
+    "repository": "git@github.com:interep/subgraph.git",
     "license": "MIT",
     "scripts": {
         "codegen": "graph codegen",

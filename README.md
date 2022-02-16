@@ -1,13 +1,13 @@
 <p align="center">
     <h1 align="center">
-        InterRep subgraph
+        Interep subgraph
     </h1>
-    <p align="center">InterRep subgraph definition (The Graph).</p>
+    <p align="center">Interep subgraph definition (The Graph).</p>
 </p>
 
 <p align="center">
-    <a href="https://github.com/InterRep" target="_blank">
-        <img src="https://img.shields.io/badge/project-InterRep-blue.svg?style=flat-square">
+    <a href="https://github.com/interep" target="_blank">
+        <img src="https://img.shields.io/badge/project-Interep-blue.svg?style=flat-square">
     </a>
     <a href="https://eslint.org/" target="_blank">
         <img alt="Linter eslint" src="https://img.shields.io/badge/linter-eslint-8080f2?style=flat-square&logo=eslint">
@@ -15,26 +15,26 @@
     <a href="https://prettier.io/" target="_blank">
         <img alt="Code style prettier" src="https://img.shields.io/badge/code%20style-prettier-f8bc45?style=flat-square&logo=prettier">
     </a>
-    <img alt="Repository top language" src="https://img.shields.io/github/languages/top/InterRep/contracts?style=flat-square">
+    <img alt="Repository top language" src="https://img.shields.io/github/languages/top/interep/contracts?style=flat-square">
 </p>
 
 <div align="center">
     <h4>
-        <a href="https://docs.interrep.link/contributing">
+        <a href="https://docs.interep.link/contributing">
             👥 Contributing
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://docs.interrep.link/code-of-conduct">
+        <a href="https://docs.interep.link/code-of-conduct">
             🤝 Code of conduct
         </a>
         <span>&nbsp;&nbsp;|&nbsp;&nbsp;</span>
-        <a href="https://t.me/interrep">
+        <a href="https://t.me/interep">
             🗣️ Chat &amp; Support
         </a>
     </h4>
 </div>
 
-The InterRep subgraph allows groups and group members to be queried using GraphQL. It is available at https://thegraph.com/hosted-service/subgraph/interrep/kovan, currently only for testnet data.
+The Interep subgraph allows groups and group members to be queried using GraphQL. It is available at https://thegraph.com/hosted-service/subgraph/interep/kovan, currently only for testnet data.
 
 ---
 
@@ -43,7 +43,7 @@ The InterRep subgraph allows groups and group members to be queried using GraphQ
 Clone this repository and install the dependencies:
 
 ```bash
-$ git clone https://github.com/InterRep/subgraph.git
+$ git clone https://github.com/interep/subgraph.git
 $ cd subgraph
 $ yarn # or `npm i`
 ```
