@@ -34,7 +34,7 @@
     </h4>
 </div>
 
-The Interep subgraph allows groups and group members to be queried using GraphQL. It is available at https://thegraph.com/hosted-service/subgraph/interep/kovan, currently only for testnet data.
+The Interep subgraph allows groups and group members to be queried using GraphQL. It is available at https://thegraph.com/hosted-service/subgraph/interep-project/kovan, currently only for testnet data.
 
 ---
 
