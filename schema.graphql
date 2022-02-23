@@ -7,7 +7,6 @@ type OffchainGroup @entity {
 type OnchainGroup @entity {
     id: ID!
     depth: Int!
-    root: BigInt!
     size: Int!
     members: [Member!]! @derivedFrom(field: "group")
 }
