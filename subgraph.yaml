@@ -1,33 +1,34 @@
 specVersion: 0.0.4
-description: A system that allows you to prove that you have a certain reputation with an NFT badge or anonymously with zero-knowledge technologies.
+description: A system that allows DApps or services to verify users' reputation without exposing their identities.
 repository: https://github.com/interep-project/subgraph
 schema:
     file: ./schema.graphql
 dataSources:
     - kind: ethereum/contract
-      name: Groups
+      name: Interep
       network: kovan
       source:
           address: "0x06bcD633988c1CE7Bd134DbE2C12119b6f3E4bD1"
-          abi: Groups
+          abi: Interep
           startBlock: 29230447
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5
           language: wasm/assemblyscript
           entities:
-              - Group
+              - OffchainGroup
+              - OnchainGroup
               - Member
           abis:
-              - name: Groups
-                file: ./abis/Groups.json
+              - name: Interep
+                file: ./abis/Interep.json
           eventHandlers:
-              - event: OffchainRoot(indexed bytes32,indexed bytes32,uint256)
+              - event: OffchainGroupAdded(indexed uint256,uint256,uint8)
                 handler: updateOffchainGroup
-              - event: GroupAdded(indexed bytes32,bytes32,uint8)
-                handler: addGroup
-              - event: IdentityCommitmentAdded(indexed bytes32,indexed bytes32,uint256,uint256)
+              - event: GroupAdded(indexed uint256,uint8)
+                handler: createOnchainGroup
+              - event: MemberAdded(indexed uint256,uint256,uint256)
                 handler: addMember
-              - event: IdentityCommitmentDeleted(indexed bytes32,indexed bytes32,uint256,uint256)
-                handler: deleteMember
+              - event: MemberRemoved(indexed uint256,uint256,uint256)
+                handler: removeMember
           file: ./src/mapping.ts
