@@ -1,14 +1,20 @@
 import { BigInt, log, ByteArray, crypto } from "@graphprotocol/graph-ts"
-import { GroupAdded, MemberAdded, MemberRemoved, OffchainGroupAdded } from "../generated/Interep/Interep"
+import {
+    GroupAdminUpdated,
+    GroupCreated,
+    MemberAdded,
+    MemberRemoved,
+    OffchainGroupUpdated
+} from "../generated/Interep/Interep"
 import { OnchainGroup, Member, OffchainGroup } from "../generated/schema"
 import { concat, hash } from "./utils"
 
 /**
- * Adds an offchain group in the storage.
+ * Updates an offchain group.
  * @param event Ethereum event emitted when an offchain group is published.
  */
-export function updateOffchainGroup(event: OffchainGroupAdded): void {
-    log.debug(`OffchainGroupAdded event block: {}`, [event.block.number.toString()])
+export function updateOffchainGroup(event: OffchainGroupUpdated): void {
+    log.debug(`OffchainGroupUpdated event block: {}`, [event.block.number.toString()])
 
     let group = OffchainGroup.load(event.params.groupId.toString())
 
@@ -37,11 +43,11 @@ export function updateOffchainGroup(event: OffchainGroupAdded): void {
 }
 
 /**
- * Adds a group in the storage.
+ * Creates an onchain group.
  * @param event Ethereum event emitted when a onchain group is created.
  */
-export function createOnchainGroup(event: GroupAdded): void {
-    log.debug(`GroupAdded event block: {}`, [event.block.number.toString()])
+export function createOnchainGroup(event: GroupCreated): void {
+    log.debug(`GroupCreated event block: {}`, [event.block.number.toString()])
 
     const group = new OnchainGroup(event.params.groupId.toString())
 
@@ -53,6 +59,26 @@ export function createOnchainGroup(event: GroupAdded): void {
     group.save()
 
     log.info("Onchain group '{}' has been created", [group.id])
+}
+
+/**
+ * Updates the admin of an onchain group.
+ * @param event Ethereum event emitted when a onchain group admin is updated.
+ */
+export function updateOnchainGroupAdmin(event: GroupAdminUpdated): void {
+    log.debug(`GroupAdminUpdated event block: {}`, [event.block.number.toString()])
+
+    const group = OnchainGroup.load(event.params.groupId.toString())
+
+    if (group) {
+        log.info("Updating admin '{}' in the onchain group '{}'", [event.params.newAdmin.toString(), group.id])
+
+        group.admin = event.params.newAdmin
+
+        group.save()
+
+        log.info("Admin '{}' of the onchain group '{}' has been updated ", [group.admin.toString(), group.id])
+    }
 }
 
 /**

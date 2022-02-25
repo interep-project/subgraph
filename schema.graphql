@@ -8,6 +8,7 @@ type OnchainGroup @entity {
     id: ID!
     depth: Int!
     size: Int!
+    admin: Bytes!
     members: [Member!]! @derivedFrom(field: "group")
 }
 
