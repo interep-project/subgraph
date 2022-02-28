@@ -55,6 +55,7 @@ export function createOnchainGroup(event: GroupCreated): void {
 
     group.depth = event.params.depth
     group.size = 0
+    group.numberOfLeaves = 0
 
     group.save()
 
@@ -100,12 +101,13 @@ export function addMember(event: MemberAdded): void {
 
         member.group = group.id
         member.identityCommitment = event.params.identityCommitment
-        member.root = event.params.root
         member.index = group.size
 
         member.save()
 
+        group.root = event.params.root
         group.size += 1
+        group.numberOfLeaves += 1
 
         group.save()
 
@@ -120,17 +122,25 @@ export function addMember(event: MemberAdded): void {
 export function removeMember(event: MemberRemoved): void {
     log.debug(`MemberRemoved event block {}`, [event.block.number.toString()])
 
-    const memberId = hash(
-        concat(ByteArray.fromBigInt(event.params.identityCommitment), ByteArray.fromBigInt(event.params.groupId))
-    )
-    const member = new Member(memberId)
+    const group = OnchainGroup.load(event.params.groupId.toString())
 
-    log.info("Removing member '{}' from the onchain group '{}'", [member.id, event.params.groupId.toString()])
+    if (group) {
+        const memberId = hash(
+            concat(ByteArray.fromBigInt(event.params.identityCommitment), ByteArray.fromBigInt(event.params.groupId))
+        )
+        const member = new Member(memberId)
 
-    member.identityCommitment = BigInt.fromByteArray(crypto.keccak256(ByteArray.fromUTF8("Semaphore")))
-    member.root = event.params.root
+        log.info("Removing member '{}' from the onchain group '{}'", [member.id, event.params.groupId.toString()])
 
-    member.save()
+        member.identityCommitment = BigInt.fromByteArray(crypto.keccak256(ByteArray.fromUTF8("Semaphore")))
 
-    log.info("Member '{}' of the onchain group '{}' has been removed", [member.id, event.params.groupId.toString()])
+        member.save()
+
+        group.root = event.params.root
+        group.size -= 1
+
+        group.save()
+
+        log.info("Member '{}' of the onchain group '{}' has been removed", [member.id, event.params.groupId.toString()])
+    }
 }

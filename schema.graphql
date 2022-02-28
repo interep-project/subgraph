@@ -7,7 +7,9 @@ type OffchainGroup @entity {
 type OnchainGroup @entity {
     id: ID!
     depth: Int!
+    root: BigInt!
     size: Int!
+    numberOfLeaves: Int!
     admin: Bytes!
     members: [Member!]! @derivedFrom(field: "group")
 }
@@ -15,7 +17,6 @@ type OnchainGroup @entity {
 type Member @entity {
     id: ID!
     identityCommitment: BigInt!
-    root: BigInt!
     index: Int!
     group: OnchainGroup!
 }
