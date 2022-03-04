@@ -8,9 +8,9 @@ dataSources:
       name: Interep
       network: kovan
       source:
-          address: "0xA86BeB7A435EF57904F927a53fD2118C6d405d41"
+          address: "0x7881B91f9c45a866cE8a8905fB93eF9Cb3B2331c"
           abi: Interep
-          startBlock: 30039736
+          startBlock: 30178217
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5
