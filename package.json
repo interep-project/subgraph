@@ -9,7 +9,7 @@
         "codegen": "graph codegen",
         "build": "graph build",
         "auth": "graph auth --product hosted-service",
-        "deploy": "yarn codegen && graph deploy --product hosted-service",
+        "deploy": "yarn codegen && graph deploy --product hosted-service interep-project/interep-groups-kovan",
         "lint": "eslint src --ext js,jsx,ts,tsx",
         "commit": "cz",
         "precommit": "lint-staged"

@@ -8,9 +8,9 @@ dataSources:
       name: Interep
       network: kovan
       source:
-          address: "0x8d6710ecB0079E34CdBcAB302F354B6a8C81558D"
+          address: "0xb2Aab6E8E99ae8788E1C6345ff3e302CBB29cdAc"
           abi: Interep
-          startBlock: 30183328
+          startBlock: 30238670
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5
@@ -23,7 +23,7 @@ dataSources:
               - name: Interep
                 file: ./abis/Interep.json
           eventHandlers:
-              - event: OffchainGroupUpdated(indexed uint256,uint256,indexed uint8)
+              - event: OffchainGroupUpdated(uint256,indexed bytes32,indexed bytes32,uint256,indexed uint8)
                 handler: updateOffchainGroup
               - event: GroupCreated(indexed uint256,uint8,uint256)
                 handler: createOnchainGroup

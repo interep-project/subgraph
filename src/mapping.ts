@@ -24,6 +24,8 @@ export function updateOffchainGroup(event: OffchainGroupUpdated): void {
 
         group = new OffchainGroup(event.params.groupId.toString())
 
+        group.provider = event.params.provider.toString()
+        group.name = event.params.name.toString()
         group.root = event.params.root
         group.depth = event.params.depth
 
