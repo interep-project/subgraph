@@ -52,9 +52,9 @@ $ yarn # or `npm i`
 
 The subgraph definition consists of a few files:
 
-* `subgraph.yaml`: a YAML file containing the subgraph manifest,
-* `schema.graphql`: a GraphQL schema that defines what data is stored for the subgraph, and how to query it via GraphQL,
-* `src/mappings.ts`: AssemblyScript code that translates from the event data to the entities defined in the schema.
+-   `subgraph.yaml`: a YAML file containing the subgraph manifest,
+-   `schema.graphql`: a GraphQL schema that defines what data is stored for the subgraph, and how to query it via GraphQL,
+-   `src/mappings.ts`: AssemblyScript code that translates from the event data to the entities defined in the schema.
 
 ### Lint
 
@@ -85,7 +85,5 @@ yarn auth <access-token>
 Deploy the subgraph to the [hosted service](https://thegraph.com/docs/hostedservice/deploy-subgraph-hosted):
 
 ```bash
-yarn deploy interep-project/<subgraph-name> 
+yarn deploy
 ```
-
-
