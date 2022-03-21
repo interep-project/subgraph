@@ -1,4 +1,4 @@
-import { BigInt, log, ByteArray, crypto } from "@graphprotocol/graph-ts"
+import { ByteArray, log } from "@graphprotocol/graph-ts"
 import {
     GroupAdminUpdated,
     GroupCreated,
@@ -6,7 +6,7 @@ import {
     MemberRemoved,
     OffchainGroupUpdated
 } from "../generated/Interep/Interep"
-import { OnchainGroup, Member, OffchainGroup } from "../generated/schema"
+import { Member, OffchainGroup, OnchainGroup } from "../generated/schema"
 import { concat, hash } from "./utils"
 
 /**
@@ -135,7 +135,7 @@ export function removeMember(event: MemberRemoved): void {
 
         log.info("Removing member '{}' from the onchain group '{}'", [member.id, event.params.groupId.toString()])
 
-        member.identityCommitment = BigInt.fromByteArray(crypto.keccak256(ByteArray.fromUTF8("Semaphore")))
+        member.identityCommitment = group.zeroValue
 
         member.save()
 
