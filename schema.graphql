@@ -9,6 +9,7 @@ type OffchainGroup @entity {
 type OnchainGroup @entity {
     id: ID!
     depth: Int!
+    zeroValue: BigInt!
     root: BigInt!
     size: Int!
     numberOfLeaves: Int!

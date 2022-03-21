@@ -56,6 +56,7 @@ export function createOnchainGroup(event: GroupCreated): void {
     log.info("Creating onchain group '{}'", [group.id])
 
     group.depth = event.params.depth
+    group.zeroValue = event.params.zeroValue
     group.size = 0
     group.numberOfLeaves = 0
 
