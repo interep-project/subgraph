@@ -131,19 +131,21 @@ export function removeMember(event: MemberRemoved): void {
         const memberId = hash(
             concat(ByteArray.fromBigInt(event.params.identityCommitment), ByteArray.fromBigInt(event.params.groupId))
         )
-        const member = new Member(memberId)
+        const member = Member.load(memberId)
+        
+        if (member) {
+            log.info("Removing member '{}' from the onchain group '{}'", [member.id, event.params.groupId.toString()])
 
-        log.info("Removing member '{}' from the onchain group '{}'", [member.id, event.params.groupId.toString()])
+            member.identityCommitment = group.zeroValue
 
-        member.identityCommitment = group.zeroValue
+            member.save()
 
-        member.save()
+            group.root = event.params.root
+            group.size -= 1
 
-        group.root = event.params.root
-        group.size -= 1
+            group.save()
 
-        group.save()
-
-        log.info("Member '{}' of the onchain group '{}' has been removed", [member.id, event.params.groupId.toString()])
+            log.info("Member '{}' of the onchain group '{}' has been removed", [member.id, event.params.groupId.toString()])
+        }
     }
 }
