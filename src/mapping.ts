@@ -114,7 +114,7 @@ export function addMember(event: MemberAdded): void {
 
         member.group = group.id
         member.identityCommitment = event.params.identityCommitment
-        member.index = group.size
+        member.index = group.numberOfLeaves
 
         member.save()
 
