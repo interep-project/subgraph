@@ -6,11 +6,11 @@ schema:
 dataSources:
     - kind: ethereum/contract
       name: Interep
-      network: kovan
+      network: {{network}}
       source:
-          address: "0xBeDb7A22bf236349ee1bEA7B4fb4Eb2403529030"
+          address: "{{address}}"
           abi: Interep
-          startBlock: 30960010
+          startBlock: {{startBlock}}
       mapping:
           kind: ethereum/events
           apiVersion: 0.0.5

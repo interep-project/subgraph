@@ -42,9 +42,6 @@ node_modules/
 dist
 build
 generated
-docs
-gh-pages/*
-!gh-pages/CNAME
 
 # dotenv environment variables file
 .env
@@ -59,3 +56,6 @@ gh-pages/*
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# The Graph
+subgraph.yaml
