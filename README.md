@@ -70,6 +70,16 @@ Lint the `src` AssemblyScript code:
 yarn lint
 ```
 
+### Network
+
+Prepare your network:
+
+```bash
+yarn prepare:kovan
+# or
+yarn prepare:goerli
+```
+
 ### Code generation
 
 Generate AssemblyScript types for the subgraph (required every time the schema changes):

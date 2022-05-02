@@ -16,21 +16,11 @@ dataSources:
           apiVersion: 0.0.5
           language: wasm/assemblyscript
           entities:
-              - OffchainGroup
-              - OnchainGroup
-              - Member
+              - Group
           abis:
               - name: Interep
                 file: ./abis/Interep.json
           eventHandlers:
-              - event: OffchainGroupUpdated(uint256,indexed bytes32,indexed bytes32,uint256,indexed uint8)
-                handler: updateOffchainGroup
-              - event: GroupCreated(indexed uint256,uint8,uint256)
-                handler: createOnchainGroup
-              - event: GroupAdminUpdated(indexed uint256,indexed address,indexed address)
-                handler: updateOnchainGroupAdmin
-              - event: MemberAdded(indexed uint256,uint256,uint256)
-                handler: addMember
-              - event: MemberRemoved(indexed uint256,uint256,uint256)
-                handler: removeMember
+              - event: GroupUpdated(uint256,indexed bytes32,indexed bytes32,uint256,indexed uint8)
+                handler: updateGroup
           file: ./src/mapping.ts
