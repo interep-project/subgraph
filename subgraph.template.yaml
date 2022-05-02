@@ -21,6 +21,6 @@ dataSources:
               - name: Interep
                 file: ./abis/Interep.json
           eventHandlers:
-              - event: MerkleTreeAdded(uint256,uint8)
-                handler: addMerkleTree
+              - event: GroupUpdated(uint256,indexed bytes32,indexed bytes32,uint256,indexed uint8)
+                handler: updateGroup
           file: ./src/mapping.ts

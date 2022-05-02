@@ -1,5 +1,7 @@
-type MerkleTree @entity {
+type Group @entity {
     id: ID!
-    root: BigInt!
+    provider: String!
+    name: String!
     depth: Int!
+    root: BigInt!
 }

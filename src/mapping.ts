@@ -1,25 +1,40 @@
 import { log } from "@graphprotocol/graph-ts"
-import { MerkleTreeAdded } from "../generated/Interep/Interep"
-import { MerkleTree } from "../generated/schema"
+import { GroupUpdated } from "../generated/Interep/Interep"
+import { Group } from "../generated/schema"
 
 /**
- * Adds an Interep Merkle tree.
- * @param event Ethereum event emitted when new Interep Merkle trees are saved on-chain.
+ * Updates an Interep group.
+ * @param event Ethereum event emitted when new Interep groups are saved on-chain.
  */
 // eslint-disable-next-line import/prefer-default-export
-export function addMerkleTree(event: MerkleTreeAdded): void {
-    log.debug(`MerkleTreeAdded event block: {}`, [event.block.number.toString()])
+export function updateGroup(event: GroupUpdated): void {
+    log.debug(`GroupUpdated event block: {}`, [event.block.number.toString()])
 
-    let group = MerkleTree.load(event.params.root.toString())
+    let group = Group.load(event.params.groupId.toString())
 
-    log.info("Creating Interep Merkle tree '{}'", [event.params.root.toString()])
+    // Creates the group if it does not exist.
+    if (group === null) {
+        log.info("Creating Interep group '{}'", [event.params.groupId.toString()])
 
-    group = new MerkleTree(event.params.root.toString())
+        group = new Group(event.params.groupId.toString())
 
-    group.root = event.params.root
-    group.depth = event.params.depth
+        group.provider = event.params.provider.toString()
+        group.name = event.params.name.toString()
+        group.root = event.params.root
+        group.depth = event.params.depth
 
-    group.save()
+        group.save()
 
-    log.info("Interep group '{}' has been created", [group.id])
+        log.info("Interep group '{}' has been created", [group.id])
+    }
+
+    // Update the root and the depth of an existing Interep group.
+    else {
+        group.root = event.params.root
+        group.depth = event.params.depth
+
+        group.save()
+
+        log.info("Interep group '{}' has been updated", [group.id])
+    }
 }
