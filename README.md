@@ -36,7 +36,7 @@
 
 ___
 
-The Interep subgraph allows groups and group members to be queried using GraphQL.
+The Interep subgraph allows on-chain Merkle trees to be queried using GraphQL.
 
 | Kovan | Goerli | Arbitrum One |
 | ------- | ----- | ------ |
